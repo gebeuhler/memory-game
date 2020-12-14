@@ -75,13 +75,13 @@ export default {
           id: 7,
           value: 4,
           flipped: false,
-          src: "https://picsum.photos/id/150/120",
+          src: "https://picsum.photos/id/151/120",
         },
         {
           id: 8,
           value: 4,
           flipped: false,
-          src: "https://picsum.photos/id/150/120",
+          src: "https://picsum.photos/id/151/120",
         },
         {
           id: 9,
@@ -198,10 +198,12 @@ export default {
         return;
       } else if (flippedCards.length === 2) {
         if (flippedCards[0].value === flippedCards[1].value) {
-          setTimeout(
-            () => (this.cards = this.cards.filter((card) => !card.flipped)),
-            3000
-          );
+          setTimeout(() => {
+            this.cards = this.cards.filter((card) => !card.flipped);
+            if (this.cards.length === 2) {
+              alert("You win!");
+            }
+          }, 3000);
         } else {
           setTimeout(() => {
             flippedCards[0].flipped = false;

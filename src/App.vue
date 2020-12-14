@@ -14,8 +14,9 @@
             min-height="150"
             min-width="150"
             class="mr-4 mb-4"
+            :disabled="!card.inPlay"
           >
-            <v-img v-if="card.flipped" :src="card.src"></v-img>
+            <v-img v-if="card.flipped || !card.inPlay" :src="card.src"></v-img>
           </v-card>
         </div>
       </v-container>
@@ -38,144 +39,168 @@ export default {
           id: 1,
           value: 1,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/1/120",
         },
         {
           id: 2,
           value: 1,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/1/120",
         },
         {
           id: 3,
           value: 2,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/50/120",
         },
         {
           id: 4,
           value: 2,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/50/120",
         },
         {
           id: 5,
           value: 3,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/100/120",
         },
         {
           id: 6,
           value: 3,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/100/120",
         },
         {
           id: 7,
           value: 4,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/151/120",
         },
         {
           id: 8,
           value: 4,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/151/120",
         },
         {
           id: 9,
           value: 5,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/200/120",
         },
         {
           id: 10,
           value: 5,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/200/120",
         },
         {
           id: 11,
           value: 6,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/250/120",
         },
         {
           id: 12,
           value: 6,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/250/120",
         },
         {
           id: 13,
           value: 7,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/300/120",
         },
         {
           id: 14,
           value: 7,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/300/120",
         },
         {
           id: 15,
           value: 8,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/350/120",
         },
         {
           id: 16,
           value: 8,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/350/120",
         },
         {
           id: 17,
           value: 9,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/400/120",
         },
         {
           id: 18,
           value: 9,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/400/120",
         },
         {
           id: 19,
           value: 10,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/450/120",
         },
         {
           id: 20,
           value: 10,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/450/120",
         },
         {
           id: 21,
           value: 11,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/500/120",
         },
         {
           id: 22,
           value: 11,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/500/120",
         },
         {
           id: 23,
           value: 12,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/550/120",
         },
         {
           id: 24,
           value: 12,
           flipped: false,
+          inPlay: true,
           src: "https://picsum.photos/id/550/120",
         },
       ],
@@ -198,16 +223,19 @@ export default {
       } else if (flippedCards.length === 2) {
         if (flippedCards[0].value === flippedCards[1].value) {
           setTimeout(() => {
-            this.cards = this.cards.filter((card) => !card.flipped);
-            if (this.cards.length === 2) {
+            flippedCards[0].inPlay = false;
+            flippedCards[1].inPlay = false;
+            flippedCards[0].flipped = false;
+            flippedCards[1].flipped = false;
+            if (this.cards.filter((card) => card.inPlay).length < 3) {
               alert("You win!");
             }
-          }, 3000);
+          }, 2000);
         } else {
           setTimeout(() => {
             flippedCards[0].flipped = false;
             flippedCards[1].flipped = false;
-          }, 3000);
+          }, 2000);
         }
       }
     },

@@ -6,9 +6,19 @@
 
     <v-main>
       <v-container fluid>
-        <div v-for="card in cards" :key="card.id" @click="flipCard(card)">
-          <div v-if="card.flipped">value: {{ card.value }}</div>
-          <div v-else>id: {{ card.id }}</div>
+        <div class="d-flex flex-wrap">
+          <v-card
+            v-for="card in cards"
+            :key="card.id"
+            @click="flipCard(card)"
+            min-width="250"
+            class="mr-4 mb-4"
+          >
+            <v-card-text>
+              <div v-if="card.flipped">value: {{ card.value }}</div>
+              <div v-else>id: {{ card.id }}</div>
+            </v-card-text>
+          </v-card>
         </div>
       </v-container>
     </v-main>

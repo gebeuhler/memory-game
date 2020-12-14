@@ -16,7 +16,6 @@
             class="mr-4 mb-4"
           >
             <v-img v-if="card.flipped" :src="card.src"></v-img>
-            {{ card.id }}
           </v-card>
         </div>
       </v-container>
@@ -208,7 +207,7 @@ export default {
           setTimeout(() => {
             flippedCards[0].flipped = false;
             flippedCards[1].flipped = false;
-          }, 1000);
+          }, 3000);
         }
       }
     },

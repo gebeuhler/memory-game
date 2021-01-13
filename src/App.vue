@@ -59,15 +59,20 @@ export default {
             flippedCards[1].inPlay = false;
             flippedCards[0].flipped = false;
             flippedCards[1].flipped = false;
-            if (this.cards.filter((card) => card.inPlay).length < 3) {
+            const cardsInPlay = this.cards.filter((card) => card.inPlay);
+            if (cardsInPlay.length < 3) {
+              cardsInPlay.forEach((card) => {
+                card.flipped = true;
+                card.inPlay = false;
+              });
               alert("You win!");
             }
-          }, 2000);
+          }, 1000);
         } else {
           setTimeout(() => {
             flippedCards[0].flipped = false;
             flippedCards[1].flipped = false;
-          }, 2000);
+          }, 1000);
         }
       }
     },

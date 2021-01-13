@@ -34,179 +34,11 @@ export default {
   components: {},
   data() {
     return {
-      cards: [
-        {
-          id: 1,
-          value: 1,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/1/120",
-        },
-        {
-          id: 2,
-          value: 1,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/1/120",
-        },
-        {
-          id: 3,
-          value: 2,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/50/120",
-        },
-        {
-          id: 4,
-          value: 2,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/50/120",
-        },
-        {
-          id: 5,
-          value: 3,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/100/120",
-        },
-        {
-          id: 6,
-          value: 3,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/100/120",
-        },
-        {
-          id: 7,
-          value: 4,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/151/120",
-        },
-        {
-          id: 8,
-          value: 4,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/151/120",
-        },
-        {
-          id: 9,
-          value: 5,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/200/120",
-        },
-        {
-          id: 10,
-          value: 5,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/200/120",
-        },
-        {
-          id: 11,
-          value: 6,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/250/120",
-        },
-        {
-          id: 12,
-          value: 6,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/250/120",
-        },
-        {
-          id: 13,
-          value: 7,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/300/120",
-        },
-        {
-          id: 14,
-          value: 7,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/300/120",
-        },
-        {
-          id: 15,
-          value: 8,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/350/120",
-        },
-        {
-          id: 16,
-          value: 8,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/350/120",
-        },
-        {
-          id: 17,
-          value: 9,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/400/120",
-        },
-        {
-          id: 18,
-          value: 9,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/400/120",
-        },
-        {
-          id: 19,
-          value: 10,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/450/120",
-        },
-        {
-          id: 20,
-          value: 10,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/450/120",
-        },
-        {
-          id: 21,
-          value: 11,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/500/120",
-        },
-        {
-          id: 22,
-          value: 11,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/500/120",
-        },
-        {
-          id: 23,
-          value: 12,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/550/120",
-        },
-        {
-          id: 24,
-          value: 12,
-          flipped: false,
-          inPlay: true,
-          src: "https://picsum.photos/id/550/120",
-        },
-      ],
+      cards: [],
     };
   },
   created() {
+    this.generateCards();
     this.cards = this.shuffle(this.cards);
   },
   computed: {
@@ -221,7 +53,7 @@ export default {
       if (flippedCards.length === 1) {
         return;
       } else if (flippedCards.length === 2) {
-        if (flippedCards[0].value === flippedCards[1].value) {
+        if (flippedCards[0].src === flippedCards[1].src) {
           setTimeout(() => {
             flippedCards[0].inPlay = false;
             flippedCards[1].inPlay = false;
@@ -238,6 +70,28 @@ export default {
           }, 2000);
         }
       }
+    },
+    generateCards() {
+      const ret = [];
+      let src;
+      const random = (min = 0, max = 50) => {
+        let num = Math.random() * (max - min) + min;
+
+        return Math.floor(num);
+      };
+
+      for (let i = 1; i < 25; i++) {
+        if (i % 2 === 1) {
+          src = `https://picsum.photos/id/${random(1, 1000)}/120`;
+        }
+        ret.push({
+          id: i,
+          flipped: false,
+          inPlay: true,
+          src,
+        });
+      }
+      this.cards = ret;
     },
     shuffle(array) {
       // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
